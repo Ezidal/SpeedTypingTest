@@ -1,0 +1,6 @@
+services:
+  my_app:
+    image: my_app:0.1
+    container_name: go
+    ports:
+      - 8080:8080
