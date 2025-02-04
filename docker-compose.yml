@@ -1,6 +1,21 @@
 services:
   my_app:
-    image: my_app:0.1
+    image: my_app:1.0
     container_name: go
+    restart: always
     ports:
       - 8080:8080
+
+  postgres:
+    image: postgres:17
+    container_name: db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+      POSTGRES_DB: db
+    volumes:
+       - ./db/:/var/lib/postgresql/data/
+

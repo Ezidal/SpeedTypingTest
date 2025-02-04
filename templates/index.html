@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма ввода</title>
+    <style>
+        .form-container {
+            display: flex;
+            gap: 10px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Введите данные:</h1>
+    <form method="POST">
+        <div class="form-container">
+            <input type="text" name="name" placeholder="Введите имя">
+            <input type="text" name="age" placeholder="Введите возраст">
+            <input type="text" name="description" placeholder="Введите описание">
+        </div>
+        <button type="submit" style="margin-top: 10px;">Отправить</button>
+        <button type="reset" style="margin-top: 10px;">Сбросить</button>
+        <button type="button" style="margin-top: 10px;" onclick="window.location.href='/'">Отмена</button>
+        <button type="button" style="margin-top: 10px;" onclick="window.location.href='/view'">Показать данные</button>
+        <button type="button" style="margin-top: 10px;" onclick="if(confirm('Вы уверены, что хотите очистить базу данных?')) { window.location.href='/clear' }">Очистить базу</button>
+    </form>
+</body>
+</html>
