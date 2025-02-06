@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Speed Typing Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Speed Typing Test</h1>
+            <div class="timer" id="timer">00:00</div>
+        </div>
+
+        <div class="text-display" id="textDisplay"></div>
+        <textarea class="input-field" id="inputField" 
+                  placeholder="Начните печатать здесь..." 
+                  rows="4"></textarea>
+
+        <div class="buttons">
+            <button class="next-btn" id="nextBtn">Следующий текст</button>
+            <button class="save-btn" id="saveBtn">Сохранить результаты</button>
+        </div>
+
+        <div class="results" id="results"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

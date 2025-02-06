@@ -68,7 +68,7 @@ func clearHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 const (
-	host     = "db"
+	host     = "localhost"
 	port     = 5432
 	user     = "user"
 	password = "user"
