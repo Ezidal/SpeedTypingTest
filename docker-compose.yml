@@ -1,8 +1,13 @@
 services:
   my_app:
-    image: my_app:1.0
+    image: speedtyping:1.0
     container_name: go
     restart: always
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_NAME: ${POSTGRES_DB}
     ports:
       - 8080:8080
 
@@ -13,9 +18,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: user
-      POSTGRES_DB: db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
        - ./db/:/var/lib/postgresql/data/
 
