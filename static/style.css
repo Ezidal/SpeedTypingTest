@@ -115,3 +115,17 @@ button:hover {
     color: #f56565;
     text-decoration: underline;
 }
+
+
+.char {
+    transition: color 0.2s ease;
+}
+
+.char.correct {
+    color: #48bb78;
+}
+
+.char.incorrect {
+    color: #f56565;
+    text-decoration: underline;
+}

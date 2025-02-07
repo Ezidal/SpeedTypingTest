@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"os"
+	"strconv"
 	"time"
 
 	_ "github.com/lib/pq"
@@ -18,19 +20,67 @@ import (
 // }
 
 var db *sql.DB
+var err error
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "user"
-	password = "user"
-	dbname   = "db"
-)
+type Config struct {
+	Host     string
+	Port     int
+	User     string
+	Password string
+	DBName   string
+}
+
+func loadConfig() (*Config, error) {
+	host := os.Getenv("DB_HOST")
+	if host == "" {
+		host = "localhost"
+		// return nil, fmt.Errorf("DB_HOST не установлен")
+	}
+
+	portStr := os.Getenv("DB_PORT")
+	port, err := strconv.Atoi(portStr)
+	if err != nil {
+		port = 5432
+		// return nil, fmt.Errorf("неверный формат DB_PORT: %v", err)
+	}
+
+	user := os.Getenv("DB_USER")
+	if user == "" {
+		user = "user"
+		// return nil, fmt.Errorf("DB_USER не установлен")
+	}
+
+	password := os.Getenv("DB_PASSWORD")
+	if password == "" {
+		password = "user"
+		// return nil, fmt.Errorf("DB_PASSWORD не установлен")
+	}
+
+	dbname := os.Getenv("DB_NAME")
+	if dbname == "" {
+		dbname = "db"
+		// return nil, fmt.Errorf("DB_NAME не установлен")
+	}
+
+	return &Config{
+		Host:     host,
+		Port:     port,
+		User:     user,
+		Password: password,
+		DBName:   dbname,
+	}, nil
+}
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
-	var err error
+
+	config, err := loadConfig()
+	if err != nil {
+		fmt.Println("Ошибка загрузки конфигурации:", err)
+		return
+	}
+	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", config.Host, config.Port, config.User, config.Password, config.DBName)
+
 	db, err = sql.Open("postgres", psqlconn)
 	if err != nil {
 		panic(err)
